@@ -1,0 +1,359 @@
+{
+  "name": "zovo-nuget-package-manager",
+  "displayName": "NuGet Package Manager & NuGet Gallery: Manage NuGet Packages, Updates, Vulnerabilities",
+  "description": "NuGet package manager and NuGet gallery for VS Code: browse nuget.org, install, update and remove NuGet packages in .csproj, .fsproj and .vbproj. Central package management (Directory.Packages.props), outdated and vulnerable packages, private feeds from nuget.config. Free, no sign-in.",
+  "version": "0.1.0",
+  "publisher": "zovo",
+  "license": "MIT",
+  "icon": "icon.png",
+  "galleryBanner": {
+    "color": "#1B2A4A",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.90.0",
+    "node": ">=18"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "nuget",
+    "nuget package manager",
+    "nuget gallery",
+    "nuget manager",
+    "nuget packages",
+    "dotnet",
+    ".net",
+    "csproj",
+    "packages",
+    "central package management",
+    "Directory.Packages.props",
+    "vulnerable packages",
+    "outdated packages",
+    "package manager",
+    "c#",
+    "f#"
+  ],
+  "main": "./src/extension.js",
+  "activationEvents": [],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "In an untrusted folder the manager can browse, but it does not run dotnet restore."
+    },
+    "virtualWorkspaces": false
+  },
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "zovoNuget",
+          "title": "NuGet",
+          "icon": "media/nuget.svg"
+        }
+      ]
+    },
+    "views": {
+      "zovoNuget": [
+        {
+          "id": "zovoNuget.projects",
+          "name": "Projects",
+          "icon": "media/nuget.svg",
+          "contextualTitle": "NuGet"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "zovoNuget.projects",
+        "contents": "No .csproj, .fsproj or .vbproj file in this folder yet.\n[Open NuGet Package Manager](command:zovoNuget.open)\nThe manager talks only to nuget.org and the feeds in your nuget.config. [Get started](command:zovoNuget.openWalkthrough)"
+      }
+    ],
+    "commands": [
+      {
+        "command": "zovoNuget.open",
+        "title": "Open NuGet Package Manager",
+        "category": "NuGet",
+        "icon": "$(package)"
+      },
+      {
+        "command": "zovoNuget.openForProject",
+        "title": "Manage NuGet Packages",
+        "category": "NuGet",
+        "icon": "$(package)"
+      },
+      {
+        "command": "zovoNuget.showUpdates",
+        "title": "Show Outdated NuGet Packages",
+        "category": "NuGet",
+        "icon": "$(arrow-up)"
+      },
+      {
+        "command": "zovoNuget.showVulnerable",
+        "title": "Show Vulnerable and Deprecated Packages",
+        "category": "NuGet",
+        "icon": "$(shield)"
+      },
+      {
+        "command": "zovoNuget.refresh",
+        "title": "Refresh Projects",
+        "category": "NuGet",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "zovoNuget.restore",
+        "title": "Run dotnet restore",
+        "category": "NuGet"
+      },
+      {
+        "command": "zovoNuget.setCredentials",
+        "title": "Set User Name and Token for a Feed",
+        "category": "NuGet",
+        "icon": "$(key)"
+      },
+      {
+        "command": "zovoNuget.clearCredentials",
+        "title": "Forget a Saved Feed Token",
+        "category": "NuGet"
+      },
+      {
+        "command": "zovoNuget.showSources",
+        "title": "Show Package Sources (nuget.config)",
+        "category": "NuGet"
+      },
+      {
+        "command": "zovoNuget.licenseReport",
+        "title": "Licence Report for the Solution, CSV (Pro)",
+        "category": "NuGet",
+        "icon": "$(law)"
+      },
+      {
+        "command": "zovoNuget.migrateCpm",
+        "title": "Migrate to Central Package Management (Pro)",
+        "category": "NuGet",
+        "icon": "$(versions)"
+      },
+      {
+        "command": "zovoNuget.openWalkthrough",
+        "title": "Get Started",
+        "category": "NuGet"
+      },
+      {
+        "command": "zovoNuget.moreViewers",
+        "title": "More free tools by Zovo",
+        "category": "NuGet"
+      },
+      {
+        "command": "zovoNuget.supportDeveloper",
+        "title": "Support the developer",
+        "category": "NuGet"
+      },
+      {
+        "command": "zovoNuget.enterLicenseKey",
+        "title": "Zovo: Enter license key",
+        "category": "NuGet"
+      },
+      {
+        "command": "zovoNuget.getPro",
+        "title": "Zovo: Get Pro (USD 19 once, all Zovo extensions)",
+        "category": "NuGet"
+      },
+      {
+        "command": "zovoNuget.unlockWithSponsors",
+        "title": "Zovo: Unlock Pro with GitHub Sponsors",
+        "category": "NuGet"
+      },
+      {
+        "command": "zovoNuget.payWithPayPal",
+        "title": "Zovo: Pay for Pro with PayPal (USD 19, team of 5 USD 59)",
+        "category": "NuGet"
+      },
+      {
+        "command": "zovoNuget.removeLicense",
+        "title": "Zovo: Remove license from this editor",
+        "category": "NuGet"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "zovoNuget.open",
+          "when": "view == zovoNuget.projects",
+          "group": "navigation@1"
+        },
+        {
+          "command": "zovoNuget.showUpdates",
+          "when": "view == zovoNuget.projects",
+          "group": "navigation@2"
+        },
+        {
+          "command": "zovoNuget.refresh",
+          "when": "view == zovoNuget.projects",
+          "group": "navigation@3"
+        },
+        {
+          "command": "zovoNuget.showVulnerable",
+          "when": "view == zovoNuget.projects",
+          "group": "more@1"
+        },
+        {
+          "command": "zovoNuget.setCredentials",
+          "when": "view == zovoNuget.projects",
+          "group": "more@2"
+        },
+        {
+          "command": "zovoNuget.showSources",
+          "when": "view == zovoNuget.projects",
+          "group": "more@3"
+        },
+        {
+          "command": "zovoNuget.licenseReport",
+          "when": "view == zovoNuget.projects && config.zovoNuget.showProFeatures",
+          "group": "pro@1"
+        },
+        {
+          "command": "zovoNuget.migrateCpm",
+          "when": "view == zovoNuget.projects && config.zovoNuget.showProFeatures",
+          "group": "pro@2"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "zovoNuget.openForProject",
+          "when": "view == zovoNuget.projects && viewItem =~ /^project/",
+          "group": "inline"
+        },
+        {
+          "command": "zovoNuget.openForProject",
+          "when": "view == zovoNuget.projects && viewItem =~ /^project/",
+          "group": "1_open"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "zovoNuget.openForProject",
+          "when": "resourceExtname =~ /^\\.(csproj|fsproj|vbproj|sln|slnx)$/ || resourceFilename == Directory.Packages.props",
+          "group": "navigation@90"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "zovoNuget.openForProject",
+          "when": "resourceExtname =~ /^\\.(csproj|fsproj|vbproj)$/ || resourceFilename == Directory.Packages.props",
+          "group": "navigation"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "zovoNuget.openForProject",
+          "when": "false"
+        },
+        {
+          "command": "zovoNuget.licenseReport",
+          "when": "config.zovoNuget.showProFeatures"
+        },
+        {
+          "command": "zovoNuget.migrateCpm",
+          "when": "config.zovoNuget.showProFeatures"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "NuGet Package Manager",
+      "properties": {
+        "zovoNuget.includePrerelease": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show prerelease versions in search, details and updates."
+        },
+        "zovoNuget.restoreAfterChange": {
+          "type": "boolean",
+          "default": true,
+          "description": "Run `dotnet restore` after an install, update or remove, when the .NET SDK is installed. Without it the change is saved and restore is skipped."
+        },
+        "zovoNuget.dotnetPath": {
+          "type": "string",
+          "default": "",
+          "description": "Full path of the dotnet program. Empty: look on PATH and in ~/.dotnet."
+        },
+        "zovoNuget.askForRating": {
+          "type": "boolean",
+          "default": true,
+          "description": "Ask once, after a few good uses, whether to rate the extension."
+        },
+        "zovoNuget.showSupportLinks": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the small Rate · More free viewers · Sponsor line at the bottom of the manager."
+        },
+        "zovoNuget.showProFeatures": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show the Zovo Pro tools (licence report, migrate to central package management). Off hides them; nothing else changes."
+        }
+      }
+    },
+    "walkthroughs": [
+      {
+        "id": "start",
+        "title": "Get started with the NuGet Package Manager",
+        "description": "Browse nuget.org, install and update packages, and find vulnerable ones. Free, no sign-in.",
+        "steps": [
+          {
+            "id": "open",
+            "title": "Open the manager",
+            "description": "Open the NuGet Package Manager from the NuGet icon in the activity bar, or right-click a .csproj and choose Manage NuGet Packages.\n[Open NuGet Package Manager](command:zovoNuget.open)",
+            "media": {
+              "image": "images/screenshot-dark.png",
+              "altText": "The NuGet Package Manager: the installed packages of a solution, with one outdated package selected and its versions."
+            },
+            "completionEvents": [
+              "onCommand:zovoNuget.open",
+              "onCommand:zovoNuget.openForProject"
+            ]
+          },
+          {
+            "id": "updates",
+            "title": "Update outdated packages",
+            "description": "The Updates tab lists every package with a newer version, across all projects. Tick the ones you want, or update all. Version ranges and the prerelease choice are respected.\n[Show Outdated Packages](command:zovoNuget.showUpdates)",
+            "media": {
+              "markdown": "walkthrough/updates.md"
+            },
+            "completionEvents": [
+              "onCommand:zovoNuget.showUpdates"
+            ]
+          },
+          {
+            "id": "feeds",
+            "title": "Private feeds",
+            "description": "Feeds come from your nuget.config files. For Azure Artifacts or GitHub Packages, paste a personal access token once; it goes to VS Code's secret storage.\n[Set a feed token](command:zovoNuget.setCredentials)",
+            "media": {
+              "markdown": "walkthrough/feeds.md"
+            },
+            "completionEvents": [
+              "onCommand:zovoNuget.setCredentials"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "test": "ZOVO_SPONSORS_MODULE=$PWD/src/license/sponsors.js node --test \"test/*.test.js\"",
+    "package": "npx -y @vscode/vsce@3 package --no-dependencies -o dist/"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theluckystrike/nuget-package-manager-vscode"
+  },
+  "bugs": {
+    "url": "https://github.com/theluckystrike/nuget-package-manager-vscode/issues"
+  },
+  "homepage": "https://github.com/theluckystrike/nuget-package-manager-vscode#readme",
+  "sponsor": {
+    "url": "https://github.com/sponsors/theluckystrike"
+  }
+}

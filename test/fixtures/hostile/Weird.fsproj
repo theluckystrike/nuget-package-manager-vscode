@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- <PackageReference Include="Commented.Out" Version="1.0.0" /> -->
+<Project Sdk='Microsoft.NET.Sdk'>
+  <PropertyGroup><TargetFramework>net8.0</TargetFramework></PropertyGroup>
+  <ItemGroup><Compile Include="Program.fs" /></ItemGroup>
+  <ItemGroup>
+    <PackageReference Include='FSharp.Core' Version='8.0.100' /><PackageReference Include="Argu" Version="6.1.1" />
+    <PackageReference Include="Expecto" Version="[10.0.0,11.0.0)" />
+    <PackageReference Include="Floaty" Version="1.*" />
+    <PackageReference Include="Odd &amp; Name" Version="1.0.0" />
+  </ItemGroup>
+</Project>

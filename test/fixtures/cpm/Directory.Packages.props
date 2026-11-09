@@ -1,0 +1,15 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <SerilogVersion>3.1.1</SerilogVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- logging -->
+    <PackageVersion Include="Serilog" Version="$(SerilogVersion)" />
+    <PackageVersion Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageVersion Include="xunit" Version="2.4.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <GlobalPackageReference Include="Nerdbank.GitVersioning" Version="3.6.133" />
+  </ItemGroup>
+</Project>
